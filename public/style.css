@@ -1,0 +1,141 @@
+:root {
+--bg: #0b0b17;
+--panel: #14142b;
+--panel-2: #1b1b3a;
+--cyan: #00f0ff;
+--magenta: #ff2bd6;
+--lime: #9dff3a;
+--red: #ff3b5c;
+--text: #e6e6ff;
+--muted: #8a8ab8;
+}
+* { box-sizing: border-box; }
+body {
+font-family: 'Rajdhani', Arial, sans-serif;
+font-size: 1.1rem;
+margin: 0;
+min-height: 100vh;
+color: var(--text);
+background:
+radial-gradient(circle at 15% 10%, rgba(255, 43, 214, 0.18), transparent 40%),
+radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.15), transparent 40%),
+linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px) 0 0 / 40px 40px,
+var(--bg);
+}
+h1, h2, button { font-family: 'Orbitron', 'Rajdhani', sans-serif; text-transform: uppercase; }
+header {
+text-align: center;
+padding: 2rem 1rem 1.2rem;
+border-bottom: 2px solid var(--cyan);
+box-shadow: 0 4px 24px rgba(0, 240, 255, 0.35);
+background: rgba(10, 10, 25, 0.8);
+}
+header h1 {
+margin: 0 0 0.4rem;
+font-size: clamp(1.6rem, 5vw, 2.8rem);
+letter-spacing: 0.15em;
+color: var(--cyan);
+text-shadow: 0 0 8px var(--cyan), 0 0 24px var(--magenta);
+animation: parpadeo 4s infinite;
+}
+header p { margin: 0; color: var(--muted); letter-spacing: 0.1em; text-transform: uppercase; }
+@keyframes parpadeo {
+0%, 92%, 100% { opacity: 1; }
+94% { opacity: 0.6; }
+96% { opacity: 1; }
+98% { opacity: 0.7; }
+}
+main {
+display: flex;
+flex-wrap: wrap;
+gap: 1.5rem;
+justify-content: center;
+align-items: flex-start;
+padding: 2rem 1rem;
+}
+#formulario, #muro {
+background: var(--panel);
+border: 2px solid var(--cyan);
+padding: 1.5rem;
+clip-path: polygon(0 0, calc(100% - 18px) 0, 100% 18px, 100% 100%, 18px 100%, 0 calc(100% - 18px));
+box-shadow: inset 0 0 24px rgba(0, 240, 255, 0.12);
+}
+#muro { border-color: var(--magenta); box-shadow: inset 0 0 24px rgba(255, 43, 214, 0.12); }
+#formulario { width: 340px; max-width: 100%; }
+#muro { width: 500px; max-width: 100%; }
+h2 {
+margin: 0 0 1rem;
+font-size: 1rem;
+letter-spacing: 0.15em;
+color: var(--lime);
+text-shadow: 0 0 8px rgba(157, 255, 58, 0.6);
+}
+h2::before { content: '> '; color: var(--cyan); }
+form { display: flex; flex-direction: column; gap: 0.8rem; }
+input, textarea {
+font-family: inherit;
+font-size: 1.1rem;
+padding: 0.6rem 0.8rem;
+color: var(--text);
+background: var(--panel-2);
+border: 2px solid #33336b;
+border-radius: 0;
+outline: none;
+transition: border-color 0.2s, box-shadow 0.2s;
+}
+input::placeholder, textarea::placeholder { color: var(--muted); }
+input:focus, textarea:focus {
+border-color: var(--cyan);
+box-shadow: 0 0 12px rgba(0, 240, 255, 0.5);
+}
+textarea { min-height: 100px; resize: vertical; }
+button {
+background: linear-gradient(135deg, var(--magenta), #7a2bff);
+color: white;
+border: none;
+padding: 0.7rem 1rem;
+font-size: 0.9rem;
+font-weight: 700;
+letter-spacing: 0.12em;
+cursor: pointer;
+clip-path: polygon(10px 0, 100% 0, calc(100% - 10px) 100%, 0 100%);
+transition: transform 0.1s, filter 0.2s;
+}
+button:hover { filter: brightness(1.25) drop-shadow(0 0 8px var(--magenta)); }
+button:active { transform: scale(0.95); }
+#mensaje { color: var(--red); min-height: 1.2rem; margin: 0.6rem 0 0; text-shadow: 0 0 6px rgba(255, 59, 92, 0.6); }
+#lista:empty::before {
+content: 'Sin misiones todavia... ¡publica la primera idea!';
+color: var(--muted);
+}
+.idea {
+position: relative;
+border: 1px solid #33336b;
+border-left: 5px solid var(--lime);
+background: var(--panel-2);
+padding: 0.8rem 1rem;
+margin-bottom: 0.9rem;
+animation: aparecer 0.35s ease-out;
+transition: transform 0.15s, box-shadow 0.15s;
+}
+.idea:hover { transform: translateX(4px); box-shadow: 0 0 16px rgba(157, 255, 58, 0.3); }
+@keyframes aparecer {
+from { opacity: 0; transform: translateY(10px) scale(0.97); }
+to { opacity: 1; transform: none; }
+}
+.idea .autor {
+font-family: 'Orbitron', sans-serif;
+font-size: 0.8rem;
+font-weight: 700;
+letter-spacing: 0.1em;
+margin: 0 0 0.4rem;
+color: var(--cyan);
+text-shadow: 0 0 6px rgba(0, 240, 255, 0.6);
+}
+.idea .autor::before { content: '\1F3AE  '; }
+.idea .texto { margin: 0 0 0.7rem; overflow-wrap: anywhere; }
+.acciones { display: flex; gap: 0.5rem; }
+.acciones button { padding: 0.4rem 1rem; font-size: 0.75rem; }
+.acciones .like { background: linear-gradient(135deg, #ffb300, #ff6a00); }
+.acciones .borrar { background: linear-gradient(135deg, var(--red), #a3002b); }
